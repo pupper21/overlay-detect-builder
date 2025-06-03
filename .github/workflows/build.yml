@@ -1,0 +1,29 @@
+name: Build OverlayDetect
+
+on:
+  push:
+    paths:
+      - overlay_detect.cpp
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up MinGW
+        uses: egor-tensin/setup-mingw@v2
+        with:
+          platform: x64
+
+      - name: Compile overlay_detect.cpp
+        run: g++ overlay_detect.cpp -o overlay_detect.exe -lpsapi -static
+
+      - name: Upload built .exe
+        uses: actions/upload-artifact@v3
+        with:
+          name: OverlayDetectEXE
+          path: overlay_detect.exe
