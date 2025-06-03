@@ -22,7 +22,7 @@ jobs:
       - name: Build overlay_detect.exe
         run: g++ overlay_detect.cpp -o overlay_detect.exe -lpsapi -static
 
-      - name: Upload executable
+      - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: OverlayDetectEXE
